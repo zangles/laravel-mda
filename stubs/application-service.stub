@@ -1,0 +1,22 @@
+<?php
+
+namespace {{ namespace }};
+
+/**
+ * Orquesta un flujo completo a nivel de aplicación.
+ *
+ * - Decide cómo se ejecuta: transacciones, logs, métricas, jobs.
+ * - Recibe datos ya validados y delega las reglas en Use Cases o Services.
+ * - No persiste directo (eso es de Actions y Repositories) ni implementa reglas de negocio.
+ */
+class {{ class }}
+{
+    public function __construct(
+        // private readonly CheckoutProcess $checkout,
+    ) {}
+
+    public function handle(): void
+    {
+        //
+    }
+}

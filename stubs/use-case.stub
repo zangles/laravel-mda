@@ -1,0 +1,22 @@
+<?php
+
+namespace {{ namespace }};
+
+/**
+ * Caso de uso: reglas de negocio de un flujo que cruza varios modelos.
+ *
+ * - Decide qué debe pasar y por qué. Coordina Services de distintos modelos.
+ * - No depende del canal (web, API, CLI) ni de detalles de infraestructura:
+ *   transacciones, logs y colas van en el Application Service.
+ */
+class {{ class }}
+{
+    public function __construct(
+        // private readonly OrderService $orderService,
+    ) {}
+
+    public function execute(): void
+    {
+        //
+    }
+}

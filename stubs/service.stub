@@ -1,0 +1,25 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ finderFqcn }};
+use {{ modelFqcn }};
+
+/**
+ * Puerta de entrada a {{ model }}: reglas de negocio propias del modelo.
+ *
+ * Puede usar Finders, Queries, Actions y Repositories de {{ model }}.
+ * No depende de Services de otros modelos: si necesitás otro modelo,
+ * eso es una Query (solo lectura) o un Use Case (reglas que cruzan modelos).
+ */
+class {{ class }}{{ implements }}
+{
+    public function __construct(
+        private readonly {{ finderClass }} $finder,
+    ) {}
+
+    public function findById(int $id): ?{{ model }}
+    {
+        return $this->finder->findById($id);
+    }
+}

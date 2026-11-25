@@ -1,0 +1,16 @@
+<?php
+
+namespace {{ namespace }};
+
+/**
+ * Lecturas complejas centradas en {{ model }}: joins, agregaciones, reportes.
+ *
+ * - Es el único lugar donde se pueden combinar varios modelos para leer.
+ * - Devuelve datos para mostrar o usar. Si devuelve entidades de {{ model }},
+ *   va en {{ model }}Finder.
+ * - Solo lectura: nunca modifica estado.
+ */
+class {{ class }}
+{
+    //
+}

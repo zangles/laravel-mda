@@ -1,0 +1,24 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ dtoFqcn }};
+use {{ repositoryFqcn }};
+
+/**
+ * Una operación concreta que modifica el estado de {{ model }}.
+ *
+ * - Escribe a través del Repository; nunca usa Queries.
+ * - Hace una sola cosa. Las decisiones de negocio van en el Service o en el Use Case.
+ */
+class {{ class }}
+{
+    public function __construct(
+        private readonly {{ repositoryClass }} $repository,
+    ) {}
+
+    public function handle({{ dtoClass }} $dto): void
+    {
+        // $this->repository->create([...]);
+    }
+}

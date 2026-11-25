@@ -1,0 +1,20 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ modelFqcn }};
+
+/**
+ * Lecturas que devuelven {{ model }} o colecciones de {{ model }}.
+ *
+ * - Si devuelve entidades, va acá. Si devuelve datos para mostrar o usar
+ *   (sumas, proyecciones, joins), va en {{ model }}Queries.
+ * - Solo lectura: no escribe ni aplica reglas de negocio.
+ */
+class {{ class }}
+{
+    public function findById(int $id): ?{{ model }}
+    {
+        return {{ model }}::find($id);
+    }
+}

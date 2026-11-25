@@ -1,0 +1,16 @@
+<?php
+
+namespace {{ namespace }};
+
+/**
+ * {{ purpose }}
+ *
+ * Solo datos: sin lógica ni dependencias. Si sentís que lo estás creando
+ * "por crear", probablemente no lo necesites.
+ */
+class {{ class }}
+{
+    public function __construct(
+        // public readonly int $id,
+    ) {}
+}
