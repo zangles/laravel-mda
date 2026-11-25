@@ -70,6 +70,17 @@ php artisan mda:application-service Checkout       # app/ApplicationServices/Che
 
 Ningún comando sobrescribe un archivo existente salvo con `--force`.
 
+### MDA por features: `--in`
+
+Todos los comandos aceptan `--in` para generar dentro de una subcarpeta de la app:
+
+```bash
+php artisan mda:model GWFactura --in=Features/Prefacturacion
+# app/Features/Prefacturacion/Finders/GWFacturaFinder.php, etc.
+```
+
+Los modelos se siguen buscando en `app/Models`.
+
 ## Configuración
 
 | Clave | Por defecto | Para qué |

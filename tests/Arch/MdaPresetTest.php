@@ -29,12 +29,12 @@ it('detecta cada relación prohibida', function () {
 
     $report = implode("\n", $violations);
 
-    // Pest acorta los nombres en el mensaje ("Zangles\Mda\Tests\Fixtures\In…tories"),
-    // así que comparo por el final de cada uno.
+    // Pest acorta los nombres en el mensaje ("Zangles\Mda\Tests\Fixtures\In…tories") y
+    // cuánto acorta cambia entre versiones, así que comparo solo por el final de cada uno.
     expect($violations)->toHaveCount(4, $report)
         ->and($report)
-        ->toContain("tories' not to use 'Zangles\\Mda\\Tests\\Fixtures\\In…rvices'")   // Repository → Service
-        ->toContain("ctions' not to use 'Zangles\\Mda\\Tests\\Fixtures\\In…ueries'")   // Action → Queries
-        ->toContain("rvices' not to use 'Zangles\\Mda\\Tests\\Fixtures\\In…eCases'")   // Service → Use Case
-        ->toContain("eCases' not to use 'Zangles\\Mda\\Tests\\Fixtures\\In…d\\Http'"); // Use Case → HTTP
+        ->toMatch("/tories' not to use '[^']*rvices'/")  // Repository → Service
+        ->toMatch("/ctions' not to use '[^']*ueries'/")  // Action → Queries
+        ->toMatch("/rvices' not to use '[^']*eCases'/")  // Service → Use Case
+        ->toMatch("/eCases' not to use '[^']*Http'/");   // Use Case → HTTP
 });

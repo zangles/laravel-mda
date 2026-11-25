@@ -39,6 +39,27 @@ final class Layout
     ) {}
 
     /**
+     * El mismo layout, pero dentro de una subcarpeta de la app. Sirve para MDA
+     * por features: within('Features/Prefacturacion') genera en
+     * App\Features\Prefacturacion\Finders en vez de App\Finders.
+     */
+    public function within(?string $scope): self
+    {
+        $scope = trim(str_replace('/', '\\', (string) $scope), '\\');
+
+        if ($scope === '') {
+            return $this;
+        }
+
+        return new self(
+            rootNamespace: $this->rootNamespace.'\\'.$scope,
+            rootPath: $this->rootPath.DIRECTORY_SEPARATOR.str_replace('\\', DIRECTORY_SEPARATOR, $scope),
+            folders: $this->folders,
+            groupByModel: $this->groupByModel,
+        );
+    }
+
+    /**
      * Namespace del componente. Para Actions y DTOs (y para los demás si
      * group_by_model está activo) se agrega la subcarpeta del modelo.
      */

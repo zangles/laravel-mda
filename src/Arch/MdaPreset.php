@@ -58,7 +58,7 @@ final class MdaPreset
 
         // Las dependencias van hacia adentro: nada de MDA conoce la capa HTTP.
         // Una regla por namespace: en Pest 3, expect([...])->not->toUse() con un
-        // array como objetivo pasa siempre sin revisar nada.
+        // array como objetivo pasa siempre sin revisar nada (en Pest 5 ya funciona).
         $http = array_map(
             static fn (string $component): ArchExpectation => expect($component)->not->toUse($namespace.'\\Http'),
             array_values($ns),

@@ -4,6 +4,7 @@ namespace Zangles\Mda\Commands;
 
 use Illuminate\Console\Command;
 use InvalidArgumentException;
+use Symfony\Component\Console\Input\InputOption;
 use Zangles\Mda\Generation\Layout;
 use Zangles\Mda\Generation\ModelReference;
 use Zangles\Mda\Generation\ModelResolver;
@@ -18,9 +19,19 @@ abstract class MdaCommand extends Command
     /** @var list<string> archivos creados en esta ejecución */
     protected array $created = [];
 
+    /**
+     * Opciones comunes a todos los comandos mda:*.
+     */
+    protected function configure(): void
+    {
+        parent::configure();
+
+        $this->addOption('in', null, InputOption::VALUE_REQUIRED, 'Subcarpeta de la app donde generar, por ejemplo Features/Pagos');
+    }
+
     protected function layout(): Layout
     {
-        return $this->laravel->make(Layout::class);
+        return $this->laravel->make(Layout::class)->within($this->option('in'));
     }
 
     /**

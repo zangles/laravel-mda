@@ -141,3 +141,26 @@ it('usa los stubs publicados por el proyecto', function () {
     expect(file_get_contents($this->appFile('Finders/OrderFinder.php')))->toContain('// stub propio')
         ->and(file_get_contents($this->appFile('Queries/OrderQueries.php')))->not->toContain('// stub propio');
 });
+
+it('genera dentro de una feature con --in (MDA por features)', function () {
+    config()->set('mda.group_by_model', true);
+    config()->set('mda.folders.dtos', 'DTOs');
+    $this->makeModel('Facturacion/GWFactura');
+
+    $this->artisan('mda:model', ['model' => 'GWFactura', '--in' => 'Features/Prefacturacion'])
+        ->expectsOutputToContain('\App\Features\Prefacturacion\Repositories\GWFactura\GWFacturaRepositoryInterface::class')
+        ->assertSuccessful();
+
+    $this->artisan('mda:action', ['model' => 'GWFactura', 'name' => 'MarcarEnviada', '--in' => 'Features/Prefacturacion'])
+        ->assertSuccessful();
+
+    expect(file_get_contents($this->appFile('Features/Prefacturacion/Finders/GWFactura/GWFacturaFinder.php')))
+        ->toContain('namespace App\Features\Prefacturacion\Finders\GWFactura;')
+        ->toContain('use App\Models\Facturacion\GWFactura;');
+
+    expect(file_get_contents($this->appFile('Features/Prefacturacion/Actions/GWFactura/MarcarEnviadaAction.php')))
+        ->toContain('use App\Features\Prefacturacion\DTOs\GWFactura\MarcarEnviadaDTO;')
+        ->toContain('use App\Features\Prefacturacion\Repositories\GWFactura\GWFacturaRepositoryInterface;');
+
+    expect($this->appFile('Finders'))->not->toBeDirectory();
+});
